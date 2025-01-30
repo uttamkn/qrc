@@ -68,7 +68,7 @@ export default function LeaderboardPage() {
                   (a, b) =>
                     b.queue_score +
                     b.recursion_score -
-                    a.queue_score +
+                    a.queue_score -
                     a.recursion_score
                 )
                 .map((user, index) => (
