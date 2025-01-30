@@ -3,40 +3,23 @@
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-
-interface Question {
-  question: string;
-  options: string[];
-  correctAnswer: number;
-}
-
-interface QuizData {
-  queues: Question[]
-  recursion: Question[]
-}
+import { getQuestions, QuizData } from "@/actions/questions"
 
 export default function PracticePage() {
-  const [currentTopic, setCurrentTopic] = useState<"queues" | "recursion" | null>(null)
+  const [currentTopic, setCurrentTopic] = useState<"queue" | "recursion" | null>(null)
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [score, setScore] = useState(0)
   const [showScore, setShowScore] = useState(false)
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
-  const [quizData, setQuizData] = useState<QuizData>({ queues: [], recursion: [] })
+  const [quizData, setQuizData] = useState<QuizData>({ queue: [], recursion: [] })
 
-  // user a use effect to fetch the questions from backend and kept remaining things same including the variable name
   useEffect(() => {
-    const fetchQuestions = async () => {
-      let data = await fetch("http://localhost:8000/quizzes/queue")
-      const queues: Question[] = await data.json()
-      data = await fetch("http://localhost:8000/quizzes/recursion")
-      const recursion = await data.json()
-      const quizData: QuizData = { queues: queues, recursion: recursion }
-      setQuizData(quizData)
-    }
-    fetchQuestions()
+    getQuestions()
+      .then((data) => setQuizData(data))
+      .catch((error) => console.error("Error fetching quizzes:", error))
   }, [])
 
-  const handleTopicSelect = (topic: "queues" | "recursion") => {
+  const handleTopicSelect = (topic: "queue" | "recursion") => {
     setCurrentTopic(topic)
     setCurrentQuestion(0)
     setScore(0)
@@ -87,7 +70,7 @@ export default function PracticePage() {
           >
             <p className="mb-4">Choose a topic to practice:</p>
             <Button
-              onClick={() => handleTopicSelect("queues")}
+              onClick={() => handleTopicSelect("queue")}
               className="mr-4 bg-primary text-primary-foreground hover:bg-primary/90"
             >
               Queues

@@ -7,11 +7,9 @@ export const postUser = async (userId: string) => {
     });
 
     if (!res.ok) {
-      console.error("Failed to create user in backend");
       throw new Error("Failed to create user in backend");
     }
   } catch (error) {
-    console.error("An error occurred while creating user", error);
     throw error;
   }
 };
