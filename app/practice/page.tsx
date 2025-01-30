@@ -38,25 +38,27 @@ export default function PracticePage() {
   }
 
   const handleSubmit = async () => {
-    if (selectedAnswer === null || currentTopic === null) return
+  if (selectedAnswer === null || currentTopic === null) return
 
-    if (selectedAnswer === quizData[currentTopic][currentQuestion].correctAnswer) {
-      setScore((prevScore) => prevScore + 1)
-    }
+  let newScore = score;
+  if (selectedAnswer === quizData[currentTopic][currentQuestion].correctAnswer) {
+    newScore = score + 1;
+    setScore(newScore);
+  }
 
-    const nextQuestion = currentQuestion + 1
-    if (nextQuestion < quizData[currentTopic].length) {
-      setCurrentQuestion(nextQuestion)
-      setSelectedAnswer(null)
-    } else {
-      setShowScore(true)
-      try {
-        await setUserScore(currentTopic, score)
-      } catch (error) {
-        console.error("Error submitting quiz:", error)
-      }
+  const nextQuestion = currentQuestion + 1;
+  if (nextQuestion < quizData[currentTopic].length) {
+    setCurrentQuestion(nextQuestion);
+    setSelectedAnswer(null);
+  } else {
+    setShowScore(true);
+    try {
+      await setUserScore(currentTopic, newScore);
+    } catch (error) {
+      console.error("Error submitting quiz:", error);
     }
   }
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 flex flex-col items-center justify-center p-4 sm:p-8">
