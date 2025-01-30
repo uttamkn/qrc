@@ -26,9 +26,9 @@ export default function PracticePage() {
   // user a use effect to fetch the questions from backend and kept remaining things same including the variable name
   useEffect(() => {
     const fetchQuestions = async () => {
-      let data = await fetch("queues url")
-      const queues = await data.json()
-      data = await fetch("recursion url")
+      let data = await fetch("http://localhost:8000/quizzes/queue")
+      const queues: Question[] = await data.json()
+      data = await fetch("http://localhost:8000/quizzes/recursion")
       const recursion = await data.json()
       const quizData: QuizData = { queues: queues, recursion: recursion }
       setQuizData(quizData)
@@ -135,7 +135,7 @@ export default function PracticePage() {
             </p>
             <p className="mb-4">{quizData[currentTopic][currentQuestion].question}</p>
             <div className="space-y-2 mb-4">
-              {quizData[currentTopic][currentQuestion].options.map((option, index) => (
+              {quizData[currentTopic][currentQuestion].options?.map((option, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
