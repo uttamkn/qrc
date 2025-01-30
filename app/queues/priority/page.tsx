@@ -111,7 +111,7 @@ export default function PriorityQueuePage() {
           <li>Elements are dequeued based on their priority, not their arrival order</li>
           <li>Can be implemented using various data structures (arrays, linked lists, heaps)</li>
           <li>Supports both ascending (min) and descending (max) priority orders</li>
-          <li>Commonly used in algorithms like Dijkstra's shortest path and Huffman coding</li>
+          <li>Commonly used in algorithms like Dijkstra&apos;s shortest path and Huffman coding</li>
         </ul>
       </section>
 
@@ -144,7 +144,7 @@ export default function PriorityQueuePage() {
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h2 className="text-2xl font-semibold mb-4">C Code Implementation</h2>
-        <p className="mb-4">Here's an example implementation of a Priority Queue in C using an array:</p>
+        <p className="mb-4">Here&apos;s an example implementation of a Priority Queue in C using an array:</p>
         <CodeBlock code={priorityQueueCode} language="c" />
         <p className="mt-4">
           This implementation uses an array of structures to store elements and their priorities. The enqueue operation
@@ -161,7 +161,7 @@ export default function PriorityQueuePage() {
             <strong>Task Scheduling:</strong> In operating systems to schedule processes based on priority
           </li>
           <li>
-            <strong>Dijkstra's Algorithm:</strong> For finding the shortest path in a graph
+            <strong>Dijkstra&apos;s Algorithm:</strong> For finding the shortest path in a graph
           </li>
           <li>
             <strong>Huffman Coding:</strong> In data compression algorithms

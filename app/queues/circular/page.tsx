@@ -102,7 +102,7 @@ export default function CircularQueuePage() {
         <h1 className="text-3xl font-bold mb-6">Circular Queue</h1>
         <p className="mb-4">
           A <strong>Circular Queue</strong> is an advanced implementation of a queue that addresses some limitations of
-          a simple queue. It's also known as a "Ring Buffer" because it conceptually wraps around to form a circle.
+          a simple queue. It&apos;s also known as a &quot;Ring Buffer&quot; because it conceptually wraps around to form a circle.
         </p>
         <p className="mb-4">Key characteristics of a Circular Queue:</p>
         <ul className="list-disc list-inside mb-4 pl-4">
@@ -142,7 +142,7 @@ export default function CircularQueuePage() {
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h2 className="text-2xl font-semibold mb-4">C Code Implementation</h2>
-        <p className="mb-4">Here's an example implementation of a Circular Queue in C:</p>
+        <p className="mb-4">Here&apos;s an example implementation of a Circular Queue in C:</p>
         <CodeBlock code={circularQueueCode} language="c" />
         <p className="mt-4">
           This implementation uses an array to store the queue elements and keeps track of the front, rear, and size.
@@ -157,7 +157,7 @@ export default function CircularQueuePage() {
             <strong>Better Memory Utilization:</strong> Reuses the empty spaces created by dequeue operations
           </li>
           <li>
-            <strong>Prevents Overflow:</strong> As long as there's at least one empty space, enqueue operation can be
+            <strong>Prevents Overflow:</strong> As long as there&apos;s at least one empty space, enqueue operation can be
             performed
           </li>
           <li>

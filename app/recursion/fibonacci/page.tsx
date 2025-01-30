@@ -93,7 +93,7 @@ export default function FibonacciPage() {
         <h2 className="text-2xl font-semibold mb-4">Recursive Implementation</h2>
         <p className="mb-4">
           The Fibonacci sequence can be implemented recursively, making it a classic example of recursive algorithms.
-          Here's how it works:
+          Here&apos;s how it works:
         </p>
         <ul className="list-disc list-inside mb-4 pl-4">
           <li>Base case: If n is 0 or 1, return n</li>
@@ -146,8 +146,8 @@ export default function FibonacciPage() {
         <h2 className="text-2xl font-semibold mb-4">C Code Implementation</h2>
         <CodeBlock code={fibonacciCode} language="c" />
         <p className="mt-4">
-          This C code demonstrates a simple recursive implementation of the Fibonacci sequence. While it's
-          straightforward, it's important to note that this approach has exponential time complexity and can be very
+          This C code demonstrates a simple recursive implementation of the Fibonacci sequence. While it&apos;s
+          straightforward, it&apos;s important to note that this approach has exponential time complexity and can be very
           slow for large values of n. In practice, more efficient algorithms like dynamic programming or matrix
           exponentiation are used for calculating Fibonacci numbers.
         </p>

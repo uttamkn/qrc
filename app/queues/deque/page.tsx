@@ -146,7 +146,7 @@ export default function DequePage() {
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h1 className="text-3xl font-bold mb-6">Double-ended Queue (Deque)</h1>
         <p className="mb-4">
-          A <strong>Double-ended Queue</strong>, often abbreviated as <strong>Deque</strong> (pronounced "deck"), is an
+          A <strong>Double-ended Queue</strong>, often abbreviated as <strong>Deque</strong> (pronounced &quot;deck&quot;), is an
           abstract data type that generalizes a queue, for which elements can be added to or removed from either the
           front (head) or back (tail).
         </p>
@@ -197,7 +197,7 @@ export default function DequePage() {
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h2 className="text-2xl font-semibold mb-4">C Code Implementation</h2>
-        <p className="mb-4">Here's an example implementation of a Deque in C:</p>
+        <p className="mb-4">Here&apos;s an example implementation of a Deque in C:</p>
         <CodeBlock code={dequeCode} language="c" />
         <p className="mt-4">
           This implementation uses a circular array to efficiently manage the deque elements. The front and rear

@@ -132,11 +132,11 @@ export default function SimpleQueuePage() {
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h2 className="text-2xl font-semibold mb-4">C Code Implementation</h2>
-        <p className="mb-4">Here's an example implementation of a Simple Queue in C:</p>
+        <p className="mb-4">Here&apos;s an example implementation of a Simple Queue in C:</p>
         <CodeBlock code={simpleQueueCode} language="c" />
         <p className="mt-4">
           This implementation uses an array to store the queue elements and keeps track of the front and rear indices.
-          Note that this simple implementation doesn't reuse space after dequeuing, which is a limitation addressed by
+          Note that this simple implementation doesn&apos;t reuse space after dequeuing, which is a limitation addressed by
           circular queues.
         </p>
       </section>

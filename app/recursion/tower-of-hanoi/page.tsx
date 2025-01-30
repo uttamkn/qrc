@@ -166,7 +166,7 @@ export default function TowerOfHanoiPage() {
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h2 className="text-2xl font-semibold mb-4">C Code Implementation</h2>
-        <p className="mb-4">Here's an example implementation of the Tower of Hanoi solution in C:</p>
+        <p className="mb-4">Here&apos;s an example implementation of the Tower of Hanoi solution in C:</p>
         <CodeBlock code={towerOfHanoiCode} language="c" />
         <p className="mt-4">
           This C code demonstrates a recursive implementation of the Tower of Hanoi problem. The function `towerOfHanoi`

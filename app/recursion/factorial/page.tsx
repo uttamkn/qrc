@@ -77,7 +77,7 @@ export default function FactorialPage() {
         <h1 className="text-3xl font-bold mb-6">Factorial</h1>
         <p className="mb-4">
           The factorial of a non-negative integer n, denoted as n!, is the product of all positive integers less than or
-          equal to n. It's defined as:
+          equal to n. It&apos;s defined as:
         </p>
         <p className="mb-4 font-semibold">n! = n × (n-1) × (n-2) × ... × 3 × 2 × 1</p>
         <p className="mb-4">By definition, 0! and 1! are both equal to 1.</p>
@@ -147,8 +147,8 @@ export default function FactorialPage() {
         <h2 className="text-2xl font-semibold mb-4">C Code Implementation</h2>
         <CodeBlock code={factorialCode} language="c" />
         <p className="mt-4">
-          This C code demonstrates a simple recursive implementation of the factorial function. While it's
-          straightforward and mirrors the mathematical definition closely, it's worth noting that for very large
+          This C code demonstrates a simple recursive implementation of the factorial function. While it&apos;s
+          straightforward and mirrors the mathematical definition closely, it&apos;s worth noting that for very large
           numbers, this approach can lead to stack overflow. In practice, an iterative implementation or tail-recursive
           optimization might be preferred for handling larger inputs.
         </p>
@@ -168,14 +168,14 @@ export default function FactorialPage() {
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h2 className="text-2xl font-semibold mb-4">Limitations and Considerations</h2>
-        <p className="mb-4">When working with factorials, it's important to keep in mind:</p>
+        <p className="mb-4">When working with factorials, it&apos;s important to keep in mind:</p>
         <ul className="list-disc list-inside mb-4 pl-4">
           <li>Factorial grows very quickly, leading to large numbers even for relatively small inputs</li>
           <li>
             For large inputs, the result may exceed the maximum value that can be stored in standard integer types
           </li>
           <li>Recursive implementations can lead to stack overflow for large inputs</li>
-          <li>In practice, approximations like Stirling's formula may be used for very large factorials</li>
+          <li>In practice, approximations like Stirling&apos;s formula may be used for very large factorials</li>
         </ul>
         <p className="mb-4">
           Understanding these limitations is crucial when implementing factorial calculations in real-world

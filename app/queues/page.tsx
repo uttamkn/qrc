@@ -18,14 +18,14 @@ export default function QueuesPage() {
           <h2 className="text-2xl font-semibold mb-4">What is a Queue?</h2>
           <p className="mb-4">
             A <strong>queue</strong> is a fundamental data structure that follows the <em>First-In-First-Out (FIFO)</em>{" "}
-            principle. It's similar to a real-world queue or line, where the first person to join the line is the first
+            principle. It&apos;s similar to a real-world queue or line, where the first person to join the line is the first
             one to be served.
           </p>
           <p className="mb-4">Think of a queue like a line of people waiting to buy tickets at a movie theater:</p>
           <ul className="list-disc list-inside mb-4 pl-4">
             <li>New people join the back of the line (enqueue operation)</li>
             <li>The person at the front of the line is served first (dequeue operation)</li>
-            <li>People can't "cut" in line - they must wait their turn</li>
+            <li>People can&apos;t &quot;cut&quot; in line - they must wait their turn</li>
           </ul>
         </section>
         <hr className="my-8 border-border" />
@@ -97,12 +97,12 @@ export default function QueuesPage() {
           <h3 className="text-xl font-semibold mb-2">2. Circular Queue</h3>
           <p className="mb-4">
             A space-efficient version of a queue using a circular buffer. When the rear reaches the end of the array, it
-            wraps around to the beginning if there's space.
+            wraps around to the beginning if there&apos;s space.
           </p>
 
           <h3 className="text-xl font-semibold mb-2">3. Double-ended Queue (Deque)</h3>
           <p className="mb-4">
-            A queue that allows insertion and deletion at both ends. It's more flexible than a standard queue.
+            A queue that allows insertion and deletion at both ends. It&apos;s more flexible than a standard queue.
           </p>
 
           <h3 className="text-xl font-semibold mb-2">4. Priority Queue</h3>
@@ -140,7 +140,7 @@ export default function QueuesPage() {
         <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
           <h2 className="text-2xl font-semibold mb-4">Explore Queue Implementations</h2>
           <p className="mb-4">
-            In the following sections, you'll find interactive visualizations and code implementations for different
+            In the following sections, you&apos;ll find interactive visualizations and code implementations for different
             types of queues. These will help you understand how queues work and how they can be implemented in code.
           </p>
           <ul className="list-disc list-inside mb-4 pl-4">

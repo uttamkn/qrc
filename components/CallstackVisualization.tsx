@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
 
 interface CallstackVisualizationProps {
   callstack: string[]
@@ -10,13 +9,10 @@ interface CallstackVisualizationProps {
 
 export default function CallstackVisualization({ callstack }: CallstackVisualizationProps) {
   const [visibleStack, setVisibleStack] = useState<string[]>([])
-  const [popping, setPopping] = useState(false)
 
   useEffect(() => {
-    if (!popping) {
       setVisibleStack(callstack)
-    }
-  }, [callstack, popping])
+  }, [callstack])
 
 
 

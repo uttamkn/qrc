@@ -17,7 +17,7 @@ export default function RecursionPage() {
         <h2 className="text-2xl font-semibold mb-4">What is Recursion?</h2>
         <p className="mb-4">
           <strong>Recursion</strong> is a powerful programming technique where a function calls itself to solve a
-          problem by breaking it down into smaller, similar subproblems. It's a way of solving problems that can be
+          problem by breaking it down into smaller, similar subproblems. It&apos;s a way of solving problems that can be
           divided into simpler versions of the same problem.
         </p>
         <p className="mb-4">Think of recursion like a Russian nesting doll:</p>
@@ -80,7 +80,7 @@ export default function RecursionPage() {
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h2 className="text-2xl font-semibold mb-4">Example: Factorial Calculation</h2>
-        <p className="mb-4">Let's look at a simple example of recursion: calculating the factorial of a number.</p>
+        <p className="mb-4">Let&apos;s look at a simple example of recursion: calculating the factorial of a number.</p>
         <pre className="bg-gray-100 p-4 rounded-md mb-4">
           <code>{`
 function factorial(n) {
