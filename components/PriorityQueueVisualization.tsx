@@ -1,38 +1,40 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface PriorityQueueItem {
-  value: string
-  priority: number
+  value: string;
+  priority: number;
 }
 
 export default function PriorityQueueVisualization() {
-  const [queue, setQueue] = useState<PriorityQueueItem[]>([])
-  const [inputValue, setInputValue] = useState("")
-  const [inputPriority, setInputPriority] = useState("")
+  const [queue, setQueue] = useState<PriorityQueueItem[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [inputPriority, setInputPriority] = useState("");
 
   const enqueue = () => {
     if (inputValue.trim() !== "" && inputPriority.trim() !== "") {
       const newItem: PriorityQueueItem = {
         value: inputValue.trim(),
         priority: Number.parseInt(inputPriority.trim()),
-      }
-      const newQueue = [...queue, newItem].sort((a, b) => b.priority - a.priority)
-      setQueue(newQueue)
-      setInputValue("")
-      setInputPriority("")
+      };
+      const newQueue = [...queue, newItem].sort(
+        (a, b) => b.priority - a.priority,
+      );
+      setQueue(newQueue);
+      setInputValue("");
+      setInputPriority("");
     }
-  }
+  };
 
   const dequeue = () => {
     if (queue.length > 0) {
-      setQueue(queue.slice(1))
+      setQueue(queue.slice(1));
     }
-  }
+  };
 
   return (
     <div className="space-y-4">
@@ -51,15 +53,23 @@ export default function PriorityQueueVisualization() {
           placeholder="Priority"
           className="bg-background text-foreground"
         />
-        <Button onClick={enqueue} className="bg-primary text-primary-foreground">
+        <Button
+          onClick={enqueue}
+          className="bg-primary text-primary-foreground"
+        >
           Enqueue
         </Button>
-        <Button onClick={dequeue} className="bg-secondary text-secondary-foreground">
+        <Button
+          onClick={dequeue}
+          className="bg-secondary text-secondary-foreground"
+        >
           Dequeue
         </Button>
       </div>
       <div className="bg-card p-4 rounded-lg">
-        <h3 className="text-lg font-semibold mb-2 text-card-foreground">Priority Queue:</h3>
+        <h3 className="text-lg font-semibold mb-2 text-card-foreground">
+          Priority Queue:
+        </h3>
         <div className="flex flex-col items-start space-y-2">
           <AnimatePresence>
             {queue.map((item, index) => (
@@ -74,13 +84,14 @@ export default function PriorityQueueVisualization() {
                 <div className="w-8 h-8 flex items-center justify-center bg-accent text-accent-foreground rounded-full">
                   {item.priority}
                 </div>
-                <div className="bg-primary text-primary-foreground px-4 py-2 rounded">{item.value}</div>
+                <div className="bg-primary text-primary-foreground px-4 py-2 rounded">
+                  {item.value}
+                </div>
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
       </div>
     </div>
-  )
+  );
 }
-

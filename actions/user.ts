@@ -15,7 +15,7 @@ export const postUser = async (userId: string, user_name: string) => {
       process.env.BACKEND_URL + `/user/${userId}?user_name=${user_name}`,
       {
         method: "POST",
-      }
+      },
     );
 
     if (!res.ok) {
@@ -28,7 +28,7 @@ export const postUser = async (userId: string, user_name: string) => {
 
 export const setUserScore = async (
   topic: "queue" | "recursion",
-  score: number
+  score: number,
 ) => {
   const session = await auth();
   const userId = session?.user?.id;
@@ -40,7 +40,7 @@ export const setUserScore = async (
       process.env.BACKEND_URL + `/user/${userId}/${topic}?score=${score}`,
       {
         method: "PUT",
-      }
+      },
     );
 
     if (!res.ok) {
@@ -68,7 +68,7 @@ export const getAllUsers = async () => {
           recursion_score: Number(user_array[3]),
         };
         users_array.push(user);
-      }
+      },
     );
     return users_array;
   } catch (error) {

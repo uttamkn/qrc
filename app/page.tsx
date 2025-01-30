@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Cpu, BrainCircuit } from "lucide-react"
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Cpu, BrainCircuit } from "lucide-react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -13,7 +13,7 @@ const containerVariants = {
       delayChildren: 0.3,
     },
   },
-}
+};
 
 const itemVariants = {
   hidden: { y: 50, opacity: 0 },
@@ -25,7 +25,7 @@ const itemVariants = {
       stiffness: 100,
     },
   },
-}
+};
 
 const floatingAnimation = {
   y: ["0%", "5%", "0%"],
@@ -34,7 +34,7 @@ const floatingAnimation = {
     repeat: Number.POSITIVE_INFINITY,
     ease: "easeInOut",
   },
-}
+};
 
 export default function HomePage() {
   return (
@@ -84,7 +84,11 @@ export default function HomePage() {
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={itemVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <motion.div
+            variants={itemVariants}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <Link
               href="/queues"
               className="block p-8 bg-blue-500 dark:bg-blue-600 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2"
@@ -92,13 +96,20 @@ export default function HomePage() {
               <motion.div animate={floatingAnimation} className="mb-4">
                 <Cpu className="w-16 h-16 text-white" />
               </motion.div>
-              <h2 className="text-3xl font-bold mb-4 text-white">Queues Mastery</h2>
+              <h2 className="text-3xl font-bold mb-4 text-white">
+                Queues Mastery
+              </h2>
               <p className="text-blue-100 dark:text-blue-200 text-lg">
-                Dive into the world of queues with mind-bending visualizations and challenges.
+                Dive into the world of queues with mind-bending visualizations
+                and challenges.
               </p>
             </Link>
           </motion.div>
-          <motion.div variants={itemVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <motion.div
+            variants={itemVariants}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <Link
               href="/recursion"
               className="block p-8 bg-purple-500 dark:bg-purple-600 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2"
@@ -106,15 +117,17 @@ export default function HomePage() {
               <motion.div animate={floatingAnimation} className="mb-4">
                 <BrainCircuit className="w-16 h-16 text-white" />
               </motion.div>
-              <h2 className="text-3xl font-bold mb-4 text-white">Recursion Wizardry</h2>
+              <h2 className="text-3xl font-bold mb-4 text-white">
+                Recursion Wizardry
+              </h2>
               <p className="text-purple-100 dark:text-purple-200 text-lg">
-                Unravel the mysteries of recursion with captivating step-by-step visualizations.
+                Unravel the mysteries of recursion with captivating step-by-step
+                visualizations.
               </p>
             </Link>
           </motion.div>
         </motion.div>
       </div>
     </div>
-  )
+  );
 }
-

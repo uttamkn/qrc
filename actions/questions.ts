@@ -43,4 +43,3 @@ export const getQuestions = async (): Promise<QuizData> => {
 
   return quizData;
 };
-

@@ -1,6 +1,6 @@
-"use client"
-import CodeBlock from "@/components/CodeBlock"
-import CircularQueueVisualization from "@/components/CircularQueueVisualization"
+"use client";
+import CodeBlock from "@/components/CodeBlock";
+import CircularQueueVisualization from "@/components/CircularQueueVisualization";
 
 const circularQueueCode = `
 #include <stdio.h>
@@ -93,7 +93,7 @@ int main() {
 
     return 0;
 }
-`
+`;
 
 export default function CircularQueuePage() {
   return (
@@ -101,29 +101,43 @@ export default function CircularQueuePage() {
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h1 className="text-3xl font-bold mb-6">Circular Queue</h1>
         <p className="mb-4">
-          A <strong>Circular Queue</strong> is an advanced implementation of a queue that addresses some limitations of
-          a simple queue. It&apos;s also known as a &quot;Ring Buffer&quot; because it conceptually wraps around to form a circle.
+          A <strong>Circular Queue</strong> is an advanced implementation of a
+          queue that addresses some limitations of a simple queue. It&apos;s
+          also known as a &quot;Ring Buffer&quot; because it conceptually wraps
+          around to form a circle.
         </p>
         <p className="mb-4">Key characteristics of a Circular Queue:</p>
         <ul className="list-disc list-inside mb-4 pl-4">
-          <li>It efficiently uses storage, unlike a simple queue implementation</li>
-          <li>The last element points to the first element, forming a circular structure</li>
+          <li>
+            It efficiently uses storage, unlike a simple queue implementation
+          </li>
+          <li>
+            The last element points to the first element, forming a circular
+            structure
+          </li>
           <li>It follows the FIFO (First In First Out) principle</li>
-          <li>It solves the problem of unutilized space in a simple queue implementation</li>
+          <li>
+            It solves the problem of unutilized space in a simple queue
+            implementation
+          </li>
         </ul>
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
-        <h2 className="text-2xl font-semibold mb-4">Circular Queue Operations</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          Circular Queue Operations
+        </h2>
         <ul className="list-disc list-inside mb-4 pl-4">
           <li>
             <strong>Enqueue:</strong> Add an element to the rear of the queue
           </li>
           <li>
-            <strong>Dequeue:</strong> Remove and return the element at the front of the queue
+            <strong>Dequeue:</strong> Remove and return the element at the front
+            of the queue
           </li>
           <li>
-            <strong>Front:</strong> Get the front element of the queue without removing it
+            <strong>Front:</strong> Get the front element of the queue without
+            removing it
           </li>
           <li>
             <strong>IsEmpty:</strong> Check if the queue is empty
@@ -135,57 +149,76 @@ export default function CircularQueuePage() {
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
-        <h2 className="text-2xl font-semibold mb-4">Interactive Circular Queue Demonstration</h2>
-        <p className="mb-4">Explore the behavior of a circular queue with this interactive visualization:</p>
+        <h2 className="text-2xl font-semibold mb-4">
+          Interactive Circular Queue Demonstration
+        </h2>
+        <p className="mb-4">
+          Explore the behavior of a circular queue with this interactive
+          visualization:
+        </p>
         <CircularQueueVisualization />
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h2 className="text-2xl font-semibold mb-4">C Code Implementation</h2>
-        <p className="mb-4">Here&apos;s an example implementation of a Circular Queue in C:</p>
+        <p className="mb-4">
+          Here&apos;s an example implementation of a Circular Queue in C:
+        </p>
         <CodeBlock code={circularQueueCode} language="c" />
         <p className="mt-4">
-          This implementation uses an array to store the queue elements and keeps track of the front, rear, and size.
-          The modulo operation is used to wrap around the array indices, creating the circular behavior.
+          This implementation uses an array to store the queue elements and
+          keeps track of the front, rear, and size. The modulo operation is used
+          to wrap around the array indices, creating the circular behavior.
         </p>
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
-        <h2 className="text-2xl font-semibold mb-4">Advantages of Circular Queues</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          Advantages of Circular Queues
+        </h2>
         <ul className="list-disc list-inside mb-4 pl-4">
           <li>
-            <strong>Better Memory Utilization:</strong> Reuses the empty spaces created by dequeue operations
+            <strong>Better Memory Utilization:</strong> Reuses the empty spaces
+            created by dequeue operations
           </li>
           <li>
-            <strong>Prevents Overflow:</strong> As long as there&apos;s at least one empty space, enqueue operation can be
-            performed
+            <strong>Prevents Overflow:</strong> As long as there&apos;s at least
+            one empty space, enqueue operation can be performed
           </li>
           <li>
-            <strong>Efficient for Circular Operations:</strong> Ideal for applications that require repeated cycling
-            through elements
+            <strong>Efficient for Circular Operations:</strong> Ideal for
+            applications that require repeated cycling through elements
           </li>
         </ul>
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
-        <h2 className="text-2xl font-semibold mb-4">Applications of Circular Queues</h2>
-        <p className="mb-4">Circular queues are used in various real-world applications, including:</p>
+        <h2 className="text-2xl font-semibold mb-4">
+          Applications of Circular Queues
+        </h2>
+        <p className="mb-4">
+          Circular queues are used in various real-world applications,
+          including:
+        </p>
         <ul className="list-disc list-inside mb-4 pl-4">
           <li>
-            <strong>Traffic Light Control:</strong> Managing the cycling of traffic light phases
+            <strong>Traffic Light Control:</strong> Managing the cycling of
+            traffic light phases
           </li>
           <li>
-            <strong>CPU Scheduling:</strong> In operating systems for round-robin scheduling
+            <strong>CPU Scheduling:</strong> In operating systems for
+            round-robin scheduling
           </li>
           <li>
-            <strong>Audio/Video Streaming:</strong> Buffering data for smooth playback
+            <strong>Audio/Video Streaming:</strong> Buffering data for smooth
+            playback
           </li>
           <li>
-            <strong>Memory Management:</strong> In embedded systems with limited memory
+            <strong>Memory Management:</strong> In embedded systems with limited
+            memory
           </li>
         </ul>
       </section>
     </div>
-  )
+  );
 }
-

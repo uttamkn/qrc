@@ -1,21 +1,23 @@
-"use client"
+"use client";
 
-import type React from "react"
-import Tree from "react-d3-tree"
-import { motion } from "framer-motion"
-import styles from "./RecursiveTreeVisualization.module.css"
+import type React from "react";
+import Tree from "react-d3-tree";
+import { motion } from "framer-motion";
+import styles from "./RecursiveTreeVisualization.module.css";
 
 interface TreeNode {
-  name: string
-  attributes?: { [key: string]: string | number }
-  children?: TreeNode[]
+  name: string;
+  attributes?: { [key: string]: string | number };
+  children?: TreeNode[];
 }
 
 interface RecursiveTreeVisualizationProps {
-  data: TreeNode
+  data: TreeNode;
 }
 
-const RecursiveTreeVisualization: React.FC<RecursiveTreeVisualizationProps> = ({ data }) => {
+const RecursiveTreeVisualization: React.FC<RecursiveTreeVisualizationProps> = ({
+  data,
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, height: 0 }}
@@ -36,8 +38,7 @@ const RecursiveTreeVisualization: React.FC<RecursiveTreeVisualizationProps> = ({
         leafNodeClassName={styles.node__leaf}
       />
     </motion.div>
-  )
-}
+  );
+};
 
-export default RecursiveTreeVisualization
-
+export default RecursiveTreeVisualization;

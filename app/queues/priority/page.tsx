@@ -1,6 +1,6 @@
-"use client"
-import CodeBlock from "@/components/CodeBlock"
-import PriorityQueueVisualization from "@/components/PriorityQueueVisualization"
+"use client";
+import CodeBlock from "@/components/CodeBlock";
+import PriorityQueueVisualization from "@/components/PriorityQueueVisualization";
 
 const priorityQueueCode = `
 #include <stdio.h>
@@ -94,7 +94,7 @@ int main() {
 
     return 0;
 }
-`
+`;
 
 export default function PriorityQueuePage() {
   return (
@@ -102,81 +102,119 @@ export default function PriorityQueuePage() {
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h1 className="text-3xl font-bold mb-6">Priority Queue</h1>
         <p className="mb-4">
-          A <strong>Priority Queue</strong> is a special type of queue where each element has an associated priority.
-          Elements with higher priority are served before elements with lower priority, regardless of their order in the
-          queue.
+          A <strong>Priority Queue</strong> is a special type of queue where
+          each element has an associated priority. Elements with higher priority
+          are served before elements with lower priority, regardless of their
+          order in the queue.
         </p>
         <p className="mb-4">Key characteristics of a Priority Queue:</p>
         <ul className="list-disc list-inside mb-4 pl-4">
-          <li>Elements are dequeued based on their priority, not their arrival order</li>
-          <li>Can be implemented using various data structures (arrays, linked lists, heaps)</li>
-          <li>Supports both ascending (min) and descending (max) priority orders</li>
-          <li>Commonly used in algorithms like Dijkstra&apos;s shortest path and Huffman coding</li>
+          <li>
+            Elements are dequeued based on their priority, not their arrival
+            order
+          </li>
+          <li>
+            Can be implemented using various data structures (arrays, linked
+            lists, heaps)
+          </li>
+          <li>
+            Supports both ascending (min) and descending (max) priority orders
+          </li>
+          <li>
+            Commonly used in algorithms like Dijkstra&apos;s shortest path and
+            Huffman coding
+          </li>
         </ul>
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
-        <h2 className="text-2xl font-semibold mb-4">Priority Queue Operations</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          Priority Queue Operations
+        </h2>
         <ul className="list-disc list-inside mb-4 pl-4">
           <li>
-            <strong>Enqueue:</strong> Add an element with a priority to the queue
+            <strong>Enqueue:</strong> Add an element with a priority to the
+            queue
           </li>
           <li>
-            <strong>Dequeue:</strong> Remove and return the element with the highest priority
+            <strong>Dequeue:</strong> Remove and return the element with the
+            highest priority
           </li>
           <li>
-            <strong>Peek:</strong> View the element with the highest priority without removing it
+            <strong>Peek:</strong> View the element with the highest priority
+            without removing it
           </li>
           <li>
             <strong>IsEmpty:</strong> Check if the queue is empty
           </li>
           <li>
-            <strong>IsFull:</strong> Check if the queue is full (for fixed-size implementations)
+            <strong>IsFull:</strong> Check if the queue is full (for fixed-size
+            implementations)
           </li>
         </ul>
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
-        <h2 className="text-2xl font-semibold mb-4">Interactive Priority Queue Demonstration</h2>
-        <p className="mb-4">Explore the behavior of a priority queue with this interactive visualization:</p>
+        <h2 className="text-2xl font-semibold mb-4">
+          Interactive Priority Queue Demonstration
+        </h2>
+        <p className="mb-4">
+          Explore the behavior of a priority queue with this interactive
+          visualization:
+        </p>
         <PriorityQueueVisualization />
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h2 className="text-2xl font-semibold mb-4">C Code Implementation</h2>
-        <p className="mb-4">Here&apos;s an example implementation of a Priority Queue in C using an array:</p>
+        <p className="mb-4">
+          Here&apos;s an example implementation of a Priority Queue in C using
+          an array:
+        </p>
         <CodeBlock code={priorityQueueCode} language="c" />
         <p className="mt-4">
-          This implementation uses an array of structures to store elements and their priorities. The enqueue operation
-          inserts elements in the correct position based on their priority, while the dequeue operation always removes
-          the element at the front (highest priority).
+          This implementation uses an array of structures to store elements and
+          their priorities. The enqueue operation inserts elements in the
+          correct position based on their priority, while the dequeue operation
+          always removes the element at the front (highest priority).
         </p>
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
-        <h2 className="text-2xl font-semibold mb-4">Applications of Priority Queues</h2>
-        <p className="mb-4">Priority queues are used in various real-world applications and algorithms, including:</p>
+        <h2 className="text-2xl font-semibold mb-4">
+          Applications of Priority Queues
+        </h2>
+        <p className="mb-4">
+          Priority queues are used in various real-world applications and
+          algorithms, including:
+        </p>
         <ul className="list-disc list-inside mb-4 pl-4">
           <li>
-            <strong>Task Scheduling:</strong> In operating systems to schedule processes based on priority
+            <strong>Task Scheduling:</strong> In operating systems to schedule
+            processes based on priority
           </li>
           <li>
-            <strong>Dijkstra&apos;s Algorithm:</strong> For finding the shortest path in a graph
+            <strong>Dijkstra&apos;s Algorithm:</strong> For finding the shortest
+            path in a graph
           </li>
           <li>
             <strong>Huffman Coding:</strong> In data compression algorithms
           </li>
           <li>
-            <strong>Event-driven Simulation:</strong> To process events in order of their occurrence time
+            <strong>Event-driven Simulation:</strong> To process events in order
+            of their occurrence time
           </li>
           <li>
-            <strong>Load Balancing:</strong> In distributed systems to handle requests based on priority
+            <strong>Load Balancing:</strong> In distributed systems to handle
+            requests based on priority
           </li>
         </ul>
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
-        <h2 className="text-2xl font-semibold mb-4">Advantages and Considerations</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          Advantages and Considerations
+        </h2>
         <p className="mb-4">Advantages of using Priority Queues:</p>
         <ul className="list-disc list-inside mb-4 pl-4">
           <li>Efficient handling of prioritized data</li>
@@ -185,12 +223,15 @@ export default function PriorityQueuePage() {
         </ul>
         <p className="mb-4">Considerations when using Priority Queues:</p>
         <ul className="list-disc list-inside mb-4 pl-4">
-          <li>Implementation choice affects time complexity (e.g., array vs heap)</li>
+          <li>
+            Implementation choice affects time complexity (e.g., array vs heap)
+          </li>
           <li>May require additional memory compared to simple queues</li>
-          <li>Handling of elements with equal priorities needs to be defined</li>
+          <li>
+            Handling of elements with equal priorities needs to be defined
+          </li>
         </ul>
       </section>
     </div>
-  )
+  );
 }
-

@@ -68,7 +68,7 @@ export default function LeaderboardPage() {
                   (a, b) =>
                     a.queue_score +
                     a.recursion_score -
-                    (b.queue_score + b.recursion_score)
+                    (b.queue_score + b.recursion_score),
                 )
                 .map((user, index) => (
                   <motion.tr

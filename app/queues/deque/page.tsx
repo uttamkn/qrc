@@ -1,6 +1,6 @@
-"use client"
-import CodeBlock from "@/components/CodeBlock"
-import DequeVisualization from "@/components/DequeVisualization"
+"use client";
+import CodeBlock from "@/components/CodeBlock";
+import DequeVisualization from "@/components/DequeVisualization";
 
 const dequeCode = `
 #include <stdio.h>
@@ -138,7 +138,7 @@ int main() {
 
     return 0;
 }
-`
+`;
 
 export default function DequePage() {
   return (
@@ -146,16 +146,19 @@ export default function DequePage() {
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h1 className="text-3xl font-bold mb-6">Double-ended Queue (Deque)</h1>
         <p className="mb-4">
-          A <strong>Double-ended Queue</strong>, often abbreviated as <strong>Deque</strong> (pronounced &quot;deck&quot;), is an
-          abstract data type that generalizes a queue, for which elements can be added to or removed from either the
-          front (head) or back (tail).
+          A <strong>Double-ended Queue</strong>, often abbreviated as{" "}
+          <strong>Deque</strong> (pronounced &quot;deck&quot;), is an abstract
+          data type that generalizes a queue, for which elements can be added to
+          or removed from either the front (head) or back (tail).
         </p>
         <p className="mb-4">Key characteristics of a Deque:</p>
         <ul className="list-disc list-inside mb-4 pl-4">
           <li>Elements can be added to both the front and rear</li>
           <li>Elements can be removed from both the front and rear</li>
           <li>Combines the functionality of both stacks and queues</li>
-          <li>Provides more flexibility in how data is accessed and manipulated</li>
+          <li>
+            Provides more flexibility in how data is accessed and manipulated
+          </li>
         </ul>
       </section>
 
@@ -163,87 +166,121 @@ export default function DequePage() {
         <h2 className="text-2xl font-semibold mb-4">Deque Operations</h2>
         <ul className="list-disc list-inside mb-4 pl-4">
           <li>
-            <strong>addFront / pushFront:</strong> Add an element to the front of the deque
+            <strong>addFront / pushFront:</strong> Add an element to the front
+            of the deque
           </li>
           <li>
-            <strong>addRear / pushBack:</strong> Add an element to the rear of the deque
+            <strong>addRear / pushBack:</strong> Add an element to the rear of
+            the deque
           </li>
           <li>
-            <strong>removeFront / popFront:</strong> Remove and return the element at the front of the deque
+            <strong>removeFront / popFront:</strong> Remove and return the
+            element at the front of the deque
           </li>
           <li>
-            <strong>removeRear / popBack:</strong> Remove and return the element at the rear of the deque
+            <strong>removeRear / popBack:</strong> Remove and return the element
+            at the rear of the deque
           </li>
           <li>
-            <strong>front / peekFront:</strong> View the element at the front of the deque without removing it
+            <strong>front / peekFront:</strong> View the element at the front of
+            the deque without removing it
           </li>
           <li>
-            <strong>rear / peekBack:</strong> View the element at the rear of the deque without removing it
+            <strong>rear / peekBack:</strong> View the element at the rear of
+            the deque without removing it
           </li>
           <li>
             <strong>isEmpty:</strong> Check if the deque is empty
           </li>
           <li>
-            <strong>isFull:</strong> Check if the deque is full (for bounded implementations)
+            <strong>isFull:</strong> Check if the deque is full (for bounded
+            implementations)
           </li>
         </ul>
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
-        <h2 className="text-2xl font-semibold mb-4">Interactive Deque Demonstration</h2>
-        <p className="mb-4">Explore the behavior of a double-ended queue with this interactive visualization:</p>
+        <h2 className="text-2xl font-semibold mb-4">
+          Interactive Deque Demonstration
+        </h2>
+        <p className="mb-4">
+          Explore the behavior of a double-ended queue with this interactive
+          visualization:
+        </p>
         <DequeVisualization />
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h2 className="text-2xl font-semibold mb-4">C Code Implementation</h2>
-        <p className="mb-4">Here&apos;s an example implementation of a Deque in C:</p>
+        <p className="mb-4">
+          Here&apos;s an example implementation of a Deque in C:
+        </p>
         <CodeBlock code={dequeCode} language="c" />
         <p className="mt-4">
-          This implementation uses a circular array to efficiently manage the deque elements. The front and rear
-          pointers wrap around the array, allowing for efficient use of space and constant-time operations at both ends.
+          This implementation uses a circular array to efficiently manage the
+          deque elements. The front and rear pointers wrap around the array,
+          allowing for efficient use of space and constant-time operations at
+          both ends.
         </p>
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
         <h2 className="text-2xl font-semibold mb-4">Applications of Deques</h2>
-        <p className="mb-4">Deques are versatile data structures used in various applications, including:</p>
+        <p className="mb-4">
+          Deques are versatile data structures used in various applications,
+          including:
+        </p>
         <ul className="list-disc list-inside mb-4 pl-4">
           <li>
-            <strong>Undo operations:</strong> Maintaining a history of operations that can be undone from the most
-            recent
+            <strong>Undo operations:</strong> Maintaining a history of
+            operations that can be undone from the most recent
           </li>
           <li>
-            <strong>Browser history:</strong> Implementing forward and backward navigation
+            <strong>Browser history:</strong> Implementing forward and backward
+            navigation
           </li>
           <li>
-            <strong>Palindrome checking:</strong> Efficiently checking if a string is a palindrome
+            <strong>Palindrome checking:</strong> Efficiently checking if a
+            string is a palindrome
           </li>
           <li>
-            <strong>A-Steal job scheduling algorithm:</strong> Used in multi-threaded computations
+            <strong>A-Steal job scheduling algorithm:</strong> Used in
+            multi-threaded computations
           </li>
           <li>
-            <strong>Implementing other data structures:</strong> Such as stacks and queues
+            <strong>Implementing other data structures:</strong> Such as stacks
+            and queues
           </li>
         </ul>
       </section>
 
       <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
-        <h2 className="text-2xl font-semibold mb-4">Advantages and Considerations</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          Advantages and Considerations
+        </h2>
         <p className="mb-4">Advantages of using Deques:</p>
         <ul className="list-disc list-inside mb-4 pl-4">
           <li>Versatility: Can be used as both a stack and a queue</li>
           <li>Efficiency: Constant time operations at both ends</li>
-          <li>Flexibility: Allows for more complex algorithms and data manipulations</li>
+          <li>
+            Flexibility: Allows for more complex algorithms and data
+            manipulations
+          </li>
         </ul>
         <p className="mb-4">Considerations when using Deques:</p>
         <ul className="list-disc list-inside mb-4 pl-4">
-          <li>Complexity: More complex to implement than simple queues or stacks</li>
-          <li>Memory usage: May use more memory than specialized data structures</li>
-          <li>Potential for misuse: The flexibility can lead to confusing or inefficient code if not used properly</li>
+          <li>
+            Complexity: More complex to implement than simple queues or stacks
+          </li>
+          <li>
+            Memory usage: May use more memory than specialized data structures
+          </li>
+          <li>
+            Potential for misuse: The flexibility can lead to confusing or
+            inefficient code if not used properly
+          </li>
         </ul>
       </section>
     </div>
-  )
+  );
 }
-

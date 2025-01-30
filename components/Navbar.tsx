@@ -1,11 +1,11 @@
-import Link from "next/link"
-import { auth } from "@/lib/auth"
-import Logout from "./Logout"
-import ThemeToggle from "./ThemeToggle"
-import Image from "next/image"
+import Link from "next/link";
+import { auth } from "@/lib/auth";
+import Logout from "./Logout";
+import ThemeToggle from "./ThemeToggle";
+import Image from "next/image";
 
 export async function Navbar() {
-  const session = await auth()
+  const session = await auth();
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -13,7 +13,7 @@ export async function Navbar() {
     { name: "Recursion", path: "/recursion" },
     { name: "Practice", path: "/practice" },
     { name: "Leaderboard", path: "/leaderboard" },
-  ]
+  ];
 
   return (
     <nav className="bg-background border-b border-border">
@@ -35,18 +35,18 @@ export async function Navbar() {
             ))}
           </div>
           <div className="md:hidden lg:hidden space-x-4">
-              <Link
-                href={"/leaderboard"}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
-              >
-                {"Leaderboard"}
-              </Link>
-              <Link
-                href={"/practice"}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
-              >
-                {"Practice"}
-              </Link>
+            <Link
+              href={"/leaderboard"}
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
+            >
+              {"Leaderboard"}
+            </Link>
+            <Link
+              href={"/practice"}
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
+            >
+              {"Practice"}
+            </Link>
           </div>
 
           <div className="flex items-center space-x-4">
@@ -58,7 +58,9 @@ export async function Navbar() {
               </Link>
             ) : (
               <div className="flex items-center space-x-3">
-                <span className="text-sm font-medium text-muted-foreground">{session.user.name}</span>
+                <span className="text-sm font-medium text-muted-foreground">
+                  {session.user.name}
+                </span>
                 {session.user.image && (
                   <Image
                     className="h-8 w-8 rounded-full border border-border"
@@ -76,6 +78,5 @@ export async function Navbar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }
-
