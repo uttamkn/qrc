@@ -1,8 +1,8 @@
 import Link from "next/link"
 import { auth } from "@/lib/auth"
 import Logout from "./Logout"
-import Image from "next/image"
 import ThemeToggle from "./ThemeToggle"
+import Image from "next/image"
 
 export async function Navbar() {
   const session = await auth()
@@ -16,40 +16,66 @@ export async function Navbar() {
   ]
 
   return (
-    <nav className="bg-background border-b border-border mb-4">
-      <div className="container mx-auto px-4 py-2 flex justify-between items-center">
-        <div className="flex space-x-4">
-          {navItems.map((item) => (
-            <Link key={item.path} href={item.path} className="relative">
-              {item.name}
-            </Link>
-          ))}
-          {!session?.user ? (
-            <Link href="/sign-in">
-              <div className="rounded-sm bg-blue-600 px-4 py-2 text-sm text-white">
-                Login
-              </div>
-            </Link>
-          ) : (
-            <>
-              <div className="flex items-center gap-x-2 text-sm">
-                {session?.user?.name}
-                {session?.user?.image && (
+    <nav className="bg-background border-b border-border">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <Link href="/" className="text-xl font-bold text-primary">
+            CodeQuest
+          </Link>
+
+          <div className="hidden md:flex space-x-4">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+          <div className="md:hidden lg:hidden space-x-4">
+              <Link
+                href={"/leaderboard"}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
+              >
+                {"Leaderboard"}
+              </Link>
+              <Link
+                href={"/practice"}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
+              >
+                {"Practice"}
+              </Link>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            {!session?.user ? (
+              <Link href="/sign-in">
+                <div className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors duration-200">
+                  Login
+                </div>
+              </Link>
+            ) : (
+              <div className="flex items-center space-x-3">
+                <span className="text-sm font-medium text-muted-foreground">{session.user.name}</span>
+                {session.user.image && (
                   <Image
-                    className="rounded-full"
-                    width={30}
-                    height={30}
+                    className="h-8 w-8 rounded-full border border-border"
                     alt="User Avatar"
-                    src={session.user.image}
+                    width={32}
+                    height={32}
+                    src={session.user.image || "/placeholder.svg"}
                   />
                 )}
+                <Logout />
               </div>
-              <Logout />
-            </>
-          )}
+            )}
+            <ThemeToggle />
+          </div>
         </div>
-        <ThemeToggle />
       </div>
     </nav>
   )
 }
+
