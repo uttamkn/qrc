@@ -54,13 +54,23 @@ export const setUserScore = async (
 export const getAllUsers = async () => {
   try {
     const res = await fetch(process.env.BACKEND_URL + "/users");
-
     if (!res.ok) {
       throw new Error("Failed to fetch users from backend");
     }
-
-    const users: User[] = await res.json();
-    return users;
+    const users_array_array = await res.json();
+    const users_array: User[] = [];
+    users_array_array.forEach(
+      (user_array: [string, string, number, number]) => {
+        const user: User = {
+          id: user_array[0],
+          user_name: user_array[1],
+          queue_score: Number(user_array[2]),
+          recursion_score: Number(user_array[3]),
+        };
+        users_array.push(user);
+      }
+    );
+    return users_array;
   } catch (error) {
     throw error;
   }
