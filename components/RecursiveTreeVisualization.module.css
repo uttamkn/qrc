@@ -20,7 +20,3 @@
   fill: hsl(var(--node-text));
   font-size: 12px;
 }
-
-:global(.rd3t-link) {
-  stroke: hsl(var(--node-border));
-}
