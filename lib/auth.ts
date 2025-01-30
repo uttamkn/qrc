@@ -12,6 +12,18 @@ const authOptions = {
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
   ],
+  callbacks: {
+    async session({ session, token }) {
+      session.user.id = token.id as string;
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
+    },
+  },
 } satisfies NextAuthConfig;
 
 export const {

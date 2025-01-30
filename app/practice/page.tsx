@@ -133,9 +133,9 @@ export default function PracticePage() {
             <p className="mb-4">
               Question {currentQuestion + 1}/{quizData[currentTopic].length}
             </p>
-            <p className="mb-4">{quizData[currentTopic][currentQuestion].question}</p>
+            <p className="mb-4">{quizData[currentTopic][currentQuestion]?.question}</p>
             <div className="space-y-2 mb-4">
-              {quizData[currentTopic][currentQuestion].options?.map((option, index) => (
+              {quizData[currentTopic][currentQuestion]?.options?.map((option, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
