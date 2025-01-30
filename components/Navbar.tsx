@@ -1,18 +1,11 @@
-"use client"
-
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { motion } from "framer-motion"
-import { Moon, Sun } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { auth } from "@/lib/auth"
+import Logout from "./Logout"
+import Image from "next/image"
+import ThemeToggle from "./ThemeToggle"
 
-interface NavbarProps {
-  toggleTheme: () => void
-  isDarkMode: boolean
-}
-
-export function Navbar({ toggleTheme, isDarkMode }: NavbarProps) {
-  const pathname = usePathname()
+export async function Navbar() {
+  const session = await auth()
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -28,33 +21,35 @@ export function Navbar({ toggleTheme, isDarkMode }: NavbarProps) {
         <div className="flex space-x-4">
           {navItems.map((item) => (
             <Link key={item.path} href={item.path} className="relative">
-              <span
-                className={`text-foreground hover:text-primary transition-colors ${
-                  pathname === item.path ? "text-primary" : ""
-                }`}
-              >
-                {item.name}
-              </span>
-              {pathname === item.path && (
-                <motion.div
-                  className="absolute bottom-0 left-0 w-full h-0.5 bg-primary"
-                  layoutId="underline"
-                  initial={false}
-                />
-              )}
+              {item.name}
             </Link>
           ))}
+          {!session?.user ? (
+            <Link href="/sign-in">
+              <div className="rounded-sm bg-blue-600 px-4 py-2 text-sm text-white">
+                Login
+              </div>
+            </Link>
+          ) : (
+            <>
+              <div className="flex items-center gap-x-2 text-sm">
+                {session?.user?.name}
+                {session?.user?.image && (
+                  <Image
+                    className="rounded-full"
+                    width={30}
+                    height={30}
+                    alt="User Avatar"
+                    src={session.user.image}
+                  />
+                )}
+              </div>
+              <Logout />
+            </>
+          )}
         </div>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={toggleTheme}
-          className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-        >
-          {isDarkMode ? <Sun className="h-[1.2rem] w-[1.2rem]" /> : <Moon className="h-[1.2rem] w-[1.2rem]" />}
-        </Button>
+        <ThemeToggle />
       </div>
     </nav>
   )
 }
-

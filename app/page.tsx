@@ -53,18 +53,6 @@ export default function HomePage() {
             </p>
           </Link>
         </motion.div>
-        <motion.div variants={itemVariants}>
-          <Link href="/practice" className="block p-6 bg-accent rounded-lg hover:bg-accent/90 transition-colors">
-            <h2 className="text-2xl font-semibold mb-2 text-accent-foreground">Practice</h2>
-            <p className="text-accent-foreground/80">Test your knowledge with interactive exercises and quizzes.</p>
-          </Link>
-        </motion.div>
-        <motion.div variants={itemVariants}>
-          <Link href="/leaderboard" className="block p-6 bg-primary rounded-lg hover:bg-primary/90 transition-colors">
-            <h2 className="text-2xl font-semibold mb-2 text-primary-foreground">Leaderboard</h2>
-            <p className="text-primary-foreground/80">See how you rank against other learners.</p>
-          </Link>
-        </motion.div>
       </motion.div>
     </div>
   )
