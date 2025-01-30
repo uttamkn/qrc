@@ -43,7 +43,7 @@ export default function PracticePage() {
     if (
       selectedAnswer === quizData[currentTopic][currentQuestion].correctAnswer
     ) {
-      setScore(score + 1);
+      setScore((prevScore) => prevScore + 1);
     }
 
     const nextQuestion = currentQuestion + 1;
