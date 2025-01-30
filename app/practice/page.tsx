@@ -1,59 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 
-const quizData = {
-  queues: [
-    {
-      question: "What is the time complexity of enqueue operation in a queue?",
-      options: ["O(1)", "O(n)", "O(log n)", "O(n^2)"],
-      correctAnswer: 0,
-    },
-    {
-      question: "Which of the following is not a type of queue?",
-      options: ["Circular Queue", "Priority Queue", "Deque", "Stack"],
-      correctAnswer: 3,
-    },
-    {
-      question: "In a circular queue, what happens when the rear pointer reaches the end of the array?",
-      options: [
-        "The queue is considered full",
-        "The rear pointer moves to the start of the array",
-        "The queue is resized",
-        "An error is thrown",
-      ],
-      correctAnswer: 1,
-    },
-  ],
-  recursion: [
-    {
-      question: "What is the base case in a recursive function?",
-      options: [
-        "The case where the function calls itself",
-        "The case where the function returns without calling itself",
-        "The case where the function throws an error",
-        "The case where the function runs indefinitely",
-      ],
-      correctAnswer: 1,
-    },
-    {
-      question: "What is the time complexity of a recursive fibonacci function?",
-      options: ["O(n)", "O(log n)", "O(2^n)", "O(n^2)"],
-      correctAnswer: 2,
-    },
-    {
-      question: "What is tail recursion?",
-      options: [
-        "A recursive call at the beginning of a function",
-        "A recursive call at the end of a function",
-        "A recursive call in the middle of a function",
-        "A recursive call that never terminates",
-      ],
-      correctAnswer: 1,
-    },
-  ],
+interface Question {
+  question: string;
+  options: string[];
+  correctAnswer: number;
+}
+
+interface QuizData {
+  queues: Question[]
+  recursion: Question[]
 }
 
 export default function PracticePage() {
@@ -62,6 +21,20 @@ export default function PracticePage() {
   const [score, setScore] = useState(0)
   const [showScore, setShowScore] = useState(false)
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
+  const [quizData, setQuizData] = useState<QuizData>({ queues: [], recursion: [] })
+
+  // user a use effect to fetch the questions from backend and kept remaining things same including the variable name
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      let data = await fetch("queues url")
+      const queues = await data.json()
+      data = await fetch("recursion url")
+      const recursion = await data.json()
+      const quizData: QuizData = { queues: queues, recursion: recursion }
+      setQuizData(quizData)
+    }
+    fetchQuestions()
+  }, [])
 
   const handleTopicSelect = (topic: "queues" | "recursion") => {
     setCurrentTopic(topic)
@@ -88,6 +61,7 @@ export default function PracticePage() {
       setSelectedAnswer(null)
     } else {
       setShowScore(true)
+      // write the backend function to update the score here
     }
   }
 
@@ -170,11 +144,10 @@ export default function PracticePage() {
                 >
                   <Button
                     onClick={() => handleAnswerSelect(index)}
-                    className={`w-full text-left ${
-                      selectedAnswer === index
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-secondary text-secondary-foreground hover:bg-secondary/90"
-                    }`}
+                    className={`w-full text-left ${selectedAnswer === index
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                      }`}
                   >
                     {option}
                   </Button>
