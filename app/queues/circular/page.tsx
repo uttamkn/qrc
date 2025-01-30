@@ -1,116 +1,8 @@
 "use client"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { motion } from "framer-motion"
 import CodeBlock from "@/components/CodeBlock"
+import CircularQueueVisualization from "@/components/CircularQueueVisualization"
 
-const MAX_SIZE = 5
-
-export default function CircularQueuePage() {
-  const [queue, setQueue] = useState<(string | null)[]>(new Array(MAX_SIZE).fill(null))
-  const [front, setFront] = useState(-1)
-  const [rear, setRear] = useState(-1)
-  const [inputValue, setInputValue] = useState("")
-
-  const enqueue = () => {
-    if (inputValue.trim() !== "") {
-      if ((rear + 1) % MAX_SIZE === front) {
-        alert("Queue is full!")
-        return
-      }
-      if (front === -1) {
-        setFront(0)
-        setRear(0)
-      } else {
-        setRear((rear + 1) % MAX_SIZE)
-      }
-      const newQueue = [...queue]
-      newQueue[rear] = inputValue.trim()
-      setQueue(newQueue)
-      setInputValue("")
-    }
-  }
-
-  const dequeue = () => {
-    if (front === -1) {
-      alert("Queue is empty!")
-      return
-    }
-    const newQueue = [...queue]
-    newQueue[front] = null
-    if (front === rear) {
-      setFront(-1)
-      setRear(-1)
-    } else {
-      setFront((front + 1) % MAX_SIZE)
-    }
-    setQueue(newQueue)
-  }
-
-  const getDescription = () => {
-    const size = queue.filter((item) => item !== null).length
-    if (size === 0) {
-      return "The circular queue is currently empty. You can add elements using the enqueue operation."
-    } else if (size === MAX_SIZE) {
-      return "The circular queue is full. You need to dequeue an element before you can add more."
-    } else {
-      return `The circular queue contains ${size} element${
-        size > 1 ? "s" : ""
-      }. You can continue to add elements until it reaches its maximum capacity of ${MAX_SIZE}.`
-    }
-  }
-
-  return (
-    <div className="space-y-8">
-      <h2 className="text-2xl font-semibold mb-4">Circular Queue</h2>
-      <div className="space-y-4">
-        <div className="flex space-x-2">
-          <Input
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Enter item"
-            className="bg-background text-foreground"
-          />
-          <Button onClick={enqueue} className="bg-primary text-primary-foreground hover:bg-primary/90">
-            Enqueue
-          </Button>
-          <Button onClick={dequeue} className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
-            Dequeue
-          </Button>
-        </div>
-        <div className="bg-background p-4 rounded-lg border border-border">
-          <h3 className="text-lg font-semibold mb-2 text-primary">Current Queue:</h3>
-          <div className="flex justify-center items-center h-20">
-            {queue.map((item, index) => (
-              <motion.div
-                key={index}
-                className={`w-16 h-16 flex items-center justify-center rounded-full border-2 m-1 ${
-                  item ? "bg-primary text-primary-foreground" : "bg-background text-foreground"
-                } ${index === front ? "border-green-500" : ""} ${index === rear ? "border-red-500" : ""}`}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                {item || ""}
-              </motion.div>
-            ))}
-          </div>
-          <div className="mt-2 text-center">
-            <span className="text-green-500 mr-4">Front: {front}</span>
-            <span className="text-red-500">Rear: {rear}</span>
-          </div>
-        </div>
-        <div className="bg-background p-4 rounded-lg border border-border">
-          <h3 className="text-lg font-semibold mb-2 text-primary">Description:</h3>
-          <p>{getDescription()}</p>
-        </div>
-        <div className="bg-background p-4 rounded-lg border border-border">
-          <h3 className="text-lg font-semibold mb-2 text-primary">C Code Implementation:</h3>
-          <CodeBlock
-            code={`
+const circularQueueCode = `
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -120,19 +12,21 @@ typedef struct {
     int items[MAX_SIZE];
     int front;
     int rear;
+    int size;
 } CircularQueue;
 
 void initializeQueue(CircularQueue *q) {
     q->front = -1;
     q->rear = -1;
+    q->size = 0;
 }
 
 int isFull(CircularQueue *q) {
-    return ((q->rear + 1) % MAX_SIZE == q->front);
+    return (q->size == MAX_SIZE);
 }
 
 int isEmpty(CircularQueue *q) {
-    return (q->front == -1);
+    return (q->size == 0);
 }
 
 void enqueue(CircularQueue *q, int value) {
@@ -142,11 +36,10 @@ void enqueue(CircularQueue *q, int value) {
     }
     if (isEmpty(q)) {
         q->front = 0;
-        q->rear = 0;
-    } else {
-        q->rear = (q->rear + 1) % MAX_SIZE;
     }
+    q->rear = (q->rear + 1) % MAX_SIZE;
     q->items[q->rear] = value;
+    q->size++;
     printf("%d enqueued to the queue\\n", value);
 }
 
@@ -156,11 +49,11 @@ int dequeue(CircularQueue *q) {
         return -1;
     }
     int item = q->items[q->front];
-    if (q->front == q->rear) {
+    q->front = (q->front + 1) % MAX_SIZE;
+    q->size--;
+    if (isEmpty(q)) {
         q->front = -1;
         q->rear = -1;
-    } else {
-        q->front = (q->front + 1) % MAX_SIZE;
     }
     printf("%d dequeued from the queue\\n", item);
     return item;
@@ -172,11 +65,13 @@ void display(CircularQueue *q) {
         return;
     }
     printf("Queue elements: ");
+    int count = 0;
     int i = q->front;
-    do {
+    while (count < q->size) {
         printf("%d ", q->items[i]);
         i = (i + 1) % MAX_SIZE;
-    } while (i != (q->rear + 1) % MAX_SIZE);
+        count++;
+    }
     printf("\\n");
 }
 
@@ -198,11 +93,98 @@ int main() {
 
     return 0;
 }
-`}
-            language="c"
-          />
-        </div>
-      </div>
+`
+
+export default function CircularQueuePage() {
+  return (
+    <div className="space-y-8">
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h1 className="text-3xl font-bold mb-6">Circular Queue</h1>
+        <p className="mb-4">
+          A <strong>Circular Queue</strong> is an advanced implementation of a queue that addresses some limitations of
+          a simple queue. It's also known as a "Ring Buffer" because it conceptually wraps around to form a circle.
+        </p>
+        <p className="mb-4">Key characteristics of a Circular Queue:</p>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>It efficiently uses storage, unlike a simple queue implementation</li>
+          <li>The last element points to the first element, forming a circular structure</li>
+          <li>It follows the FIFO (First In First Out) principle</li>
+          <li>It solves the problem of unutilized space in a simple queue implementation</li>
+        </ul>
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">Circular Queue Operations</h2>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>
+            <strong>Enqueue:</strong> Add an element to the rear of the queue
+          </li>
+          <li>
+            <strong>Dequeue:</strong> Remove and return the element at the front of the queue
+          </li>
+          <li>
+            <strong>Front:</strong> Get the front element of the queue without removing it
+          </li>
+          <li>
+            <strong>IsEmpty:</strong> Check if the queue is empty
+          </li>
+          <li>
+            <strong>IsFull:</strong> Check if the queue is full
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">Interactive Circular Queue Demonstration</h2>
+        <p className="mb-4">Explore the behavior of a circular queue with this interactive visualization:</p>
+        <CircularQueueVisualization />
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">C Code Implementation</h2>
+        <p className="mb-4">Here's an example implementation of a Circular Queue in C:</p>
+        <CodeBlock code={circularQueueCode} language="c" />
+        <p className="mt-4">
+          This implementation uses an array to store the queue elements and keeps track of the front, rear, and size.
+          The modulo operation is used to wrap around the array indices, creating the circular behavior.
+        </p>
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">Advantages of Circular Queues</h2>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>
+            <strong>Better Memory Utilization:</strong> Reuses the empty spaces created by dequeue operations
+          </li>
+          <li>
+            <strong>Prevents Overflow:</strong> As long as there's at least one empty space, enqueue operation can be
+            performed
+          </li>
+          <li>
+            <strong>Efficient for Circular Operations:</strong> Ideal for applications that require repeated cycling
+            through elements
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">Applications of Circular Queues</h2>
+        <p className="mb-4">Circular queues are used in various real-world applications, including:</p>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>
+            <strong>Traffic Light Control:</strong> Managing the cycling of traffic light phases
+          </li>
+          <li>
+            <strong>CPU Scheduling:</strong> In operating systems for round-robin scheduling
+          </li>
+          <li>
+            <strong>Audio/Video Streaming:</strong> Buffering data for smooth playback
+          </li>
+          <li>
+            <strong>Memory Management:</strong> In embedded systems with limited memory
+          </li>
+        </ul>
+      </section>
     </div>
   )
 }

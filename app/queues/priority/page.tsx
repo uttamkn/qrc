@@ -1,119 +1,12 @@
 "use client"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { motion } from "framer-motion"
 import CodeBlock from "@/components/CodeBlock"
+import PriorityQueueVisualization from "@/components/PriorityQueueVisualization"
 
-interface PriorityQueueItem {
-  value: string
-  priority: number
-}
-
-const MAX_SIZE = 5
-
-export default function PriorityQueuePage() {
-  const [queue, setQueue] = useState<PriorityQueueItem[]>([])
-  const [inputValue, setInputValue] = useState("")
-  const [inputPriority, setInputPriority] = useState("")
-
-  const enqueue = () => {
-    if (inputValue.trim() !== "" && inputPriority.trim() !== "") {
-      if (queue.length >= MAX_SIZE) {
-        alert("Queue is full!")
-        return
-      }
-      const newItem: PriorityQueueItem = {
-        value: inputValue.trim(),
-        priority: Number.parseInt(inputPriority.trim()),
-      }
-      const newQueue = [...queue, newItem].sort((a, b) => b.priority - a.priority)
-      setQueue(newQueue)
-      setInputValue("")
-      setInputPriority("")
-    }
-  }
-
-  const dequeue = () => {
-    if (queue.length > 0) {
-      setQueue(queue.slice(1))
-    } else {
-      alert("Queue is empty!")
-    }
-  }
-
-  const getDescription = () => {
-    const size = queue.length
-    if (size === 0) {
-      return "The priority queue is currently empty. You can add elements with priorities using the enqueue operation."
-    } else if (size === MAX_SIZE) {
-      return "The priority queue is full. You need to dequeue an element before you can add more."
-    } else {
-      return `The priority queue contains ${size} element${
-        size > 1 ? "s" : ""
-      }. Elements are ordered by their priority, with higher priority elements at the front of the queue.`
-    }
-  }
-
-  return (
-    <div className="space-y-8">
-      <h2 className="text-2xl font-semibold mb-4">Priority Queue</h2>
-      <div className="space-y-4">
-        <div className="flex space-x-2">
-          <Input
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Enter item"
-            className="bg-background text-foreground"
-          />
-          <Input
-            type="number"
-            value={inputPriority}
-            onChange={(e) => setInputPriority(e.target.value)}
-            placeholder="Priority"
-            className="bg-background text-foreground"
-          />
-          <Button onClick={enqueue} className="bg-primary text-primary-foreground hover:bg-primary/90">
-            Enqueue
-          </Button>
-          <Button onClick={dequeue} className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
-            Dequeue
-          </Button>
-        </div>
-        <div className="bg-background p-4 rounded-lg border border-border">
-          <h3 className="text-lg font-semibold mb-2 text-primary">Current Queue:</h3>
-          <div className="flex flex-col items-start space-y-2">
-            {queue.map((item, index) => (
-              <motion.div
-                key={index}
-                className="flex items-center space-x-2"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="w-8 h-8 flex items-center justify-center bg-accent text-accent-foreground rounded-full">
-                  {item.priority}
-                </div>
-                <div className="bg-primary text-primary-foreground px-4 py-2 rounded">{item.value}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-        <div className="bg-background p-4 rounded-lg border border-border">
-          <h3 className="text-lg font-semibold mb-2 text-primary">Description:</h3>
-          <p>{getDescription()}</p>
-        </div>
-        <div className="bg-background p-4 rounded-lg border border-border">
-          <h3 className="text-lg font-semibold mb-2 text-primary">C Code Implementation:</h3>
-          <CodeBlock
-            code={`
+const priorityQueueCode = `
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_SIZE 5
+#define MAX_SIZE 100
 
 typedef struct {
     int value;
@@ -201,11 +94,102 @@ int main() {
 
     return 0;
 }
-`}
-            language="c"
-          />
-        </div>
-      </div>
+`
+
+export default function PriorityQueuePage() {
+  return (
+    <div className="space-y-8">
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h1 className="text-3xl font-bold mb-6">Priority Queue</h1>
+        <p className="mb-4">
+          A <strong>Priority Queue</strong> is a special type of queue where each element has an associated priority.
+          Elements with higher priority are served before elements with lower priority, regardless of their order in the
+          queue.
+        </p>
+        <p className="mb-4">Key characteristics of a Priority Queue:</p>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>Elements are dequeued based on their priority, not their arrival order</li>
+          <li>Can be implemented using various data structures (arrays, linked lists, heaps)</li>
+          <li>Supports both ascending (min) and descending (max) priority orders</li>
+          <li>Commonly used in algorithms like Dijkstra's shortest path and Huffman coding</li>
+        </ul>
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">Priority Queue Operations</h2>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>
+            <strong>Enqueue:</strong> Add an element with a priority to the queue
+          </li>
+          <li>
+            <strong>Dequeue:</strong> Remove and return the element with the highest priority
+          </li>
+          <li>
+            <strong>Peek:</strong> View the element with the highest priority without removing it
+          </li>
+          <li>
+            <strong>IsEmpty:</strong> Check if the queue is empty
+          </li>
+          <li>
+            <strong>IsFull:</strong> Check if the queue is full (for fixed-size implementations)
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">Interactive Priority Queue Demonstration</h2>
+        <p className="mb-4">Explore the behavior of a priority queue with this interactive visualization:</p>
+        <PriorityQueueVisualization />
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">C Code Implementation</h2>
+        <p className="mb-4">Here's an example implementation of a Priority Queue in C using an array:</p>
+        <CodeBlock code={priorityQueueCode} language="c" />
+        <p className="mt-4">
+          This implementation uses an array of structures to store elements and their priorities. The enqueue operation
+          inserts elements in the correct position based on their priority, while the dequeue operation always removes
+          the element at the front (highest priority).
+        </p>
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">Applications of Priority Queues</h2>
+        <p className="mb-4">Priority queues are used in various real-world applications and algorithms, including:</p>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>
+            <strong>Task Scheduling:</strong> In operating systems to schedule processes based on priority
+          </li>
+          <li>
+            <strong>Dijkstra's Algorithm:</strong> For finding the shortest path in a graph
+          </li>
+          <li>
+            <strong>Huffman Coding:</strong> In data compression algorithms
+          </li>
+          <li>
+            <strong>Event-driven Simulation:</strong> To process events in order of their occurrence time
+          </li>
+          <li>
+            <strong>Load Balancing:</strong> In distributed systems to handle requests based on priority
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">Advantages and Considerations</h2>
+        <p className="mb-4">Advantages of using Priority Queues:</p>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>Efficient handling of prioritized data</li>
+          <li>Useful in scenarios where order of processing matters</li>
+          <li>Can be optimized for fast insertion or fast extraction</li>
+        </ul>
+        <p className="mb-4">Considerations when using Priority Queues:</p>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>Implementation choice affects time complexity (e.g., array vs heap)</li>
+          <li>May require additional memory compared to simple queues</li>
+          <li>Handling of elements with equal priorities needs to be defined</li>
+        </ul>
+      </section>
     </div>
   )
 }

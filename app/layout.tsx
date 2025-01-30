@@ -1,3 +1,4 @@
+"use client"
 import type React from "react"
 import { Navbar } from "@/components/Navbar"
 import { ThemeProvider, useTheme } from "@/components/ThemeProvider"
@@ -5,11 +6,6 @@ import "./globals.css"
 import { Inter } from "next/font/google"
 
 const inter = Inter({ subsets: ["latin"] })
-
-export const metadata = {
-  title: "Interactive Data Structures Learning",
-  description: "Learn data structures with interactive visualizations",
-}
 
 function MainContent({ children }: { children: React.ReactNode }) {
   const { theme, toggleTheme } = useTheme()

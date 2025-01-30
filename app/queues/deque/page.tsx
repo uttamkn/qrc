@@ -1,118 +1,8 @@
 "use client"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { motion } from "framer-motion"
 import CodeBlock from "@/components/CodeBlock"
+import DequeVisualization from "@/components/DequeVisualization"
 
-const MAX_SIZE = 5
-
-export default function DequePage() {
-  const [deque, setDeque] = useState<string[]>([])
-  const [inputValue, setInputValue] = useState("")
-
-  const addFront = () => {
-    if (inputValue.trim() !== "") {
-      if (deque.length >= MAX_SIZE) {
-        alert("Deque is full!")
-        return
-      }
-      setDeque([inputValue.trim(), ...deque])
-      setInputValue("")
-    }
-  }
-
-  const addRear = () => {
-    if (inputValue.trim() !== "") {
-      if (deque.length >= MAX_SIZE) {
-        alert("Deque is full!")
-        return
-      }
-      setDeque([...deque, inputValue.trim()])
-      setInputValue("")
-    }
-  }
-
-  const removeFront = () => {
-    if (deque.length > 0) {
-      setDeque(deque.slice(1))
-    } else {
-      alert("Deque is empty!")
-    }
-  }
-
-  const removeRear = () => {
-    if (deque.length > 0) {
-      setDeque(deque.slice(0, -1))
-    } else {
-      alert("Deque is empty!")
-    }
-  }
-
-  const getDescription = () => {
-    const size = deque.length
-    if (size === 0) {
-      return "The double-ended queue (deque) is currently empty. You can add elements to both the front and rear of the deque."
-    } else if (size === MAX_SIZE) {
-      return "The deque is full. You need to remove an element before you can add more."
-    } else {
-      return `The deque contains ${size} element${
-        size > 1 ? "s" : ""
-      }. You can add or remove elements from both ends of the deque.`
-    }
-  }
-
-  return (
-    <div className="space-y-8">
-      <h2 className="text-2xl font-semibold mb-4">Double-ended Queue (Deque)</h2>
-      <div className="space-y-4">
-        <div className="flex space-x-2">
-          <Input
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Enter item"
-            className="bg-background text-foreground"
-          />
-          <Button onClick={addFront} className="bg-primary text-primary-foreground hover:bg-primary/90">
-            Add Front
-          </Button>
-          <Button onClick={addRear} className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
-            Add Rear
-          </Button>
-          <Button onClick={removeFront} className="bg-accent text-accent-foreground hover:bg-accent/90">
-            Remove Front
-          </Button>
-          <Button onClick={removeRear} className="bg-primary text-primary-foreground hover:bg-primary/90">
-            Remove Rear
-          </Button>
-        </div>
-        <div className="bg-background p-4 rounded-lg border border-border">
-          <h3 className="text-lg font-semibold mb-2 text-primary">Current Deque:</h3>
-          <div className="flex justify-center items-center h-20">
-            {deque.map((item, index) => (
-              <motion.div
-                key={index}
-                className="w-16 h-16 flex items-center justify-center bg-primary text-primary-foreground rounded-lg border-2 border-secondary mx-1"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                {item}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-        <div className="bg-background p-4 rounded-lg border border-border">
-          <h3 className="text-lg font-semibold mb-2 text-primary">Description:</h3>
-          <p>{getDescription()}</p>
-        </div>
-        <div className="bg-background p-4 rounded-lg border border-border">
-          <h3 className="text-lg font-semibold mb-2 text-primary">C Code Implementation:</h3>
-          <CodeBlock
-            code={`
+const dequeCode = `
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -248,11 +138,111 @@ int main() {
 
     return 0;
 }
-`}
-            language="c"
-          />
-        </div>
-      </div>
+`
+
+export default function DequePage() {
+  return (
+    <div className="space-y-8">
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h1 className="text-3xl font-bold mb-6">Double-ended Queue (Deque)</h1>
+        <p className="mb-4">
+          A <strong>Double-ended Queue</strong>, often abbreviated as <strong>Deque</strong> (pronounced "deck"), is an
+          abstract data type that generalizes a queue, for which elements can be added to or removed from either the
+          front (head) or back (tail).
+        </p>
+        <p className="mb-4">Key characteristics of a Deque:</p>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>Elements can be added to both the front and rear</li>
+          <li>Elements can be removed from both the front and rear</li>
+          <li>Combines the functionality of both stacks and queues</li>
+          <li>Provides more flexibility in how data is accessed and manipulated</li>
+        </ul>
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">Deque Operations</h2>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>
+            <strong>addFront / pushFront:</strong> Add an element to the front of the deque
+          </li>
+          <li>
+            <strong>addRear / pushBack:</strong> Add an element to the rear of the deque
+          </li>
+          <li>
+            <strong>removeFront / popFront:</strong> Remove and return the element at the front of the deque
+          </li>
+          <li>
+            <strong>removeRear / popBack:</strong> Remove and return the element at the rear of the deque
+          </li>
+          <li>
+            <strong>front / peekFront:</strong> View the element at the front of the deque without removing it
+          </li>
+          <li>
+            <strong>rear / peekBack:</strong> View the element at the rear of the deque without removing it
+          </li>
+          <li>
+            <strong>isEmpty:</strong> Check if the deque is empty
+          </li>
+          <li>
+            <strong>isFull:</strong> Check if the deque is full (for bounded implementations)
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">Interactive Deque Demonstration</h2>
+        <p className="mb-4">Explore the behavior of a double-ended queue with this interactive visualization:</p>
+        <DequeVisualization />
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">C Code Implementation</h2>
+        <p className="mb-4">Here's an example implementation of a Deque in C:</p>
+        <CodeBlock code={dequeCode} language="c" />
+        <p className="mt-4">
+          This implementation uses a circular array to efficiently manage the deque elements. The front and rear
+          pointers wrap around the array, allowing for efficient use of space and constant-time operations at both ends.
+        </p>
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">Applications of Deques</h2>
+        <p className="mb-4">Deques are versatile data structures used in various applications, including:</p>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>
+            <strong>Undo operations:</strong> Maintaining a history of operations that can be undone from the most
+            recent
+          </li>
+          <li>
+            <strong>Browser history:</strong> Implementing forward and backward navigation
+          </li>
+          <li>
+            <strong>Palindrome checking:</strong> Efficiently checking if a string is a palindrome
+          </li>
+          <li>
+            <strong>A-Steal job scheduling algorithm:</strong> Used in multi-threaded computations
+          </li>
+          <li>
+            <strong>Implementing other data structures:</strong> Such as stacks and queues
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-8 p-6 bg-card rounded-lg border border-border shadow-sm">
+        <h2 className="text-2xl font-semibold mb-4">Advantages and Considerations</h2>
+        <p className="mb-4">Advantages of using Deques:</p>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>Versatility: Can be used as both a stack and a queue</li>
+          <li>Efficiency: Constant time operations at both ends</li>
+          <li>Flexibility: Allows for more complex algorithms and data manipulations</li>
+        </ul>
+        <p className="mb-4">Considerations when using Deques:</p>
+        <ul className="list-disc list-inside mb-4 pl-4">
+          <li>Complexity: More complex to implement than simple queues or stacks</li>
+          <li>Memory usage: May use more memory than specialized data structures</li>
+          <li>Potential for misuse: The flexibility can lead to confusing or inefficient code if not used properly</li>
+        </ul>
+      </section>
     </div>
   )
 }
