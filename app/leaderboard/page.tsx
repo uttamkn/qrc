@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { dummyLeaderboard } from "../../lib/dummyData"
+import { motion } from "framer-motion";
+import { getAllUsers, User } from "@/actions/user";
+import { useState, useEffect } from "react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -11,7 +12,7 @@ const containerVariants = {
       staggerChildren: 0.1,
     },
   },
-}
+};
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
@@ -19,10 +20,16 @@ const itemVariants = {
     y: 0,
     opacity: 1,
   },
-}
+};
 
 export default function LeaderboardPage() {
-  const leaderboardData = dummyLeaderboard
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    getAllUsers()
+      .then((users) => setUsers(users))
+      .catch((e) => console.log(e));
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -51,19 +58,25 @@ export default function LeaderboardPage() {
             </tr>
           </thead>
           <tbody>
-            {leaderboardData.map((user, index) => (
-              <motion.tr key={user.username} className="border-b border-border" variants={itemVariants}>
-                <td className="p-2">{index + 1}</td>
-                <td className="p-2">{user.username}</td>
-                <td className="p-2 text-right">{user.queues_score}</td>
-                <td className="p-2 text-right">{user.recursion_score}</td>
-                <td className="p-2 text-right">{user.total_score}</td>
-              </motion.tr>
-            ))}
+            {users &&
+              users.map((user, index) => (
+                <motion.tr
+                  key={user.user_name}
+                  className="border-b border-border"
+                  variants={itemVariants}
+                >
+                  <td className="p-2">{index + 1}</td>
+                  <td className="p-2">{user.user_name}</td>
+                  <td className="p-2 text-right">{user.queue_score}</td>
+                  <td className="p-2 text-right">{user.recursion_score}</td>
+                  <td className="p-2 text-right">
+                    {user.queue_score + user.recursion_score}
+                  </td>
+                </motion.tr>
+              ))}
           </tbody>
         </table>
       </motion.div>
     </div>
-  )
+  );
 }
-

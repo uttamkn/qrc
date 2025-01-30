@@ -4,15 +4,19 @@ import { auth } from "@/lib/auth";
 
 export interface User {
   id: string;
+  user_name: string;
   queue_score: number;
   recursion_score: number;
 }
 
-export const postUser = async (userId: string) => {
+export const postUser = async (userId: string, user_name: string) => {
   try {
-    const res = await fetch(process.env.BACKEND_URL + `/user/${userId}`, {
-      method: "POST",
-    });
+    const res = await fetch(
+      process.env.BACKEND_URL + `/user/${userId}?user_name=${user_name}`,
+      {
+        method: "POST",
+      }
+    );
 
     if (!res.ok) {
       throw new Error("Failed to create user in backend");
@@ -22,7 +26,10 @@ export const postUser = async (userId: string) => {
   }
 };
 
-export const setUserScore = async (topic: "queue" | "recursion", score: number) => {
+export const setUserScore = async (
+  topic: "queue" | "recursion",
+  score: number
+) => {
   const session = await auth();
   const userId = session?.user?.id;
   if (!userId) {
@@ -30,11 +37,10 @@ export const setUserScore = async (topic: "queue" | "recursion", score: number) 
   }
   try {
     const res = await fetch(
-      process.env.BACKEND_URL +
-        `/user/${userId}/${topic}?score=${score}`,
+      process.env.BACKEND_URL + `/user/${userId}/${topic}?score=${score}`,
       {
         method: "PUT",
-      },
+      }
     );
 
     if (!res.ok) {
@@ -53,9 +59,9 @@ export const getAllUsers = async () => {
       throw new Error("Failed to fetch users from backend");
     }
 
-    const users = await res.json();
+    const users: User[] = await res.json();
     return users;
   } catch (error) {
     throw error;
   }
-}
+};
