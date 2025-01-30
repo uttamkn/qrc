@@ -1,7 +1,10 @@
-import type { NextConfig } from "next";
+// import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const nextConfig = {
+  images: {
+    domains: ["avatars.githubusercontent.com"],
+  },
 };
+
 
 export default nextConfig;
