@@ -34,7 +34,7 @@ export default function LeaderboardPage() {
   }, []);
 
   if (error) {
-    return <div>Fucked up</div>;
+    return <div>{error}</div>;
   } else {
     return (
       <div className="container mx-auto px-4 py-8">
